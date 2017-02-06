@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<% include include/common.html %>
+		<title><%=title%></title>
+	</head>
+	<body>
+		<div id="root">
+			<% include include/sub-top.html %>
+			<div class="container">
+				<div class="block" style="margin: 0;" v-for="item in female">
+					<div class="block-title free-title"><h3 class="single">{{item.ad_name}}</h3></div>
+					<ul class="block-list">
+						<li class="list-item" v-for="list in item.data.data">
+							<a href="javascript:;">
+								<div class="item-img">
+									<img :src="list.cover" alt="{{list.title}}"/>
+								</div>
+								<div class="item-content">
+									<div class="content-title">{{list.title}}</div>
+									<div class="author">{{list.authors}}</div>
+									<p class="summary">{{list.summary}}</p>						
+									<div class="tag-list">
+										<div class="tag" v-for="tag in list.categories">{{tag.label}}</div>
+									</div>
+								</div>
+							</a>
+						</li>
+						<!--<li class="list-item">
+							<a href="javascript:;">
+								<div class="item-img">
+									<img src="http://cover.read.duokan.com/mfsv2/download/fdsc3/p01C8wDEnpYq/B7JH6pJftCzKg1.jpg" alt=""/>
+								</div>
+								<div class="item-content">
+									<div class="content-title">万古神帝</div>
+									<div class="author">飞天鱼</div>
+									<p class="summary">八百年前，明帝之子张若尘，被他的未婚妻池瑶公主杀死，一代天骄，就此陨落。八百年后，张若尘重新活了过</p>						
+									<div class="tag-list">
+										<div class="tag">玄幻</div>
+									</div>
+								</div>
+							</a>
+						</li>-->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script>
+			$(function(){
+				$.getJSON("/api_female",function(data){
+					console.log(data);
+					if(data.result===0){
+						new Vue({
+							el:"#root",
+							data:{
+								female:data.items
+							}
+						});
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

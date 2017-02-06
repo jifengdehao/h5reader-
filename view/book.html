@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<% include include/common.html %>
+		<title><%=title%></title>
+		<style>
+			.book-ad{
+				background-color: #FFFFFF;
+				padding: 15px;
+				display: flex;
+				display: -webkit-box;
+				display: -webkit-flex;
+			}
+			.book-ad .ad-img{
+				flex: 0 0 100px;
+				width: 100px;
+				height: 134px;
+			}
+			.book-ad .ad-content{
+				flex: 1;
+				padding: 15px 0 15px 15px;
+			}
+			.book-ad .ad-content .title{
+				font-size: 16px;
+			}
+			.book-ad .ad-content .author{
+				color: #4b99a7;
+			}
+			.book-ad .ad-content .conunt .status{
+				color: #63bd6e;
+   				margin-left: 5px;
+			    border: 1px solid #63bd6e;
+			    border-radius: 4px;
+			    font-size: 12px;
+			    line-height: 16px;
+			    display: inline-block;
+			    padding: 0 5px;
+			}
+			.book-det{
+				background-color: #FFFFFF;
+				border-bottom: 10px solid #f5f5f5;
+			}
+			.book-det .start-button{
+   				margin: 0 15px 15px 15px;
+   				display: block;
+   				box-sizing: border-box;
+   				text-align: center;
+   				color: #FFFFFF;
+   				background: #f35d02;
+    			border: 1px solid #e35109;
+    			height:35px;
+    			line-height: 35px;
+    			border-radius: 4px;
+			}
+			.book-det .det{
+			    line-height: 1.6;
+			    padding: 0 15px;
+			    margin-bottom: 10px;
+			    font-size: 14px;
+			    color: #585858;
+			}
+			.book-det .det-footer{
+				text-align: center;
+			    font-size: 14px;
+			    border-top: 1px solid #f0f0f0;
+			    color: #8d8d8d;
+			}
+			.book-other{
+				background-color: #FFFFFF;
+				border-bottom: 10px solid #f5f5f5;
+			}
+			.book-other:last-child{
+				border-bottom: none;
+			}
+			.book-other .title{
+			    margin-bottom: 8px;
+			    padding: 15px 15px 0 15px;
+			    font-size: 15px;
+			    color: #8d8d8d;
+			}
+			.book-other .list{
+				padding: 0 15px;
+			}
+			.book-other .list-item{
+				width: 33.33%;
+				float: left;
+			}	
+			.book-other .list-item:nth-child(3n+1){
+				text-align: left;
+			}
+			.book-other .list-item:nth-child(3n+2){
+				text-align: center;
+			}
+			.book-other .list-item:nth-child(3n+3){
+				text-align: right;
+			}
+			.book-other .list-item .cover{
+				display: inline-block;
+				width: 86px;
+				height: 113px;
+				background: #eeece9;
+			    box-shadow: 0px 6px 5px -3px #aaa;
+			    border: 1px solid #f0f0f0;
+			    border-bottom: none;
+			    overflow: hidden;
+			}
+			.book-other .list-item .info{
+				font-size: 13px;
+			    line-height: 18px;
+			    color: #8d8d8d;
+			}
+			.book-other .copyright{
+				font-size: 15px;
+				line-height: 1.6;
+				padding: 0 15px;
+			}
+			.book-other .tag-list{
+				margin: 0 15px;
+				font-size: 0;
+			}
+			.book-other .tag-list .tag{
+				margin: 0 10px 5px 0;
+			    display: inline-block;
+			    width: auto;
+			    line-height: 24px;
+			    padding: 0 20px;
+			    color: #766d5d;
+			    border-radius: 4px;
+			    background: #fbebe8;
+			    font-size: 14px;
+			    text-align: center;
+			    border: 1px solid #d3d3d3;
+			}
+		
+		</style>
+	</head>
+	<body>
+			<div id="root">
+				<% include include/sub-top.html %>
+				<div class="container">
+					<section class="book-ad">
+						<div class="ad-img">
+							<img :src="book.cover" width="100%" height="100%"/>
+						</div>
+						<div class="ad-content">
+							<h3 class="title">{{book.title}}</h3>
+							<p class="author">{{book.authors}}</p>
+							<p class="grade">{{book.score_count}}个评价</p>
+							<p class="price">价格：{{book.price}}书币/千字</p>
+							<p class="conunt">字数：{{book.word_count}}万字<span class="status" v-if="book.finish">完结</span><span class="status" v-else="book.finish">连载中</span></p>
+						</div>
+					</section>
+					 <section class="book-det">
+						<a href="http://dushu.xiaomi.com/#page=reader&id=42318&chapter_id=0&from=book&_t=index.1.b.0*2_42318"class="start-button">开始阅读</a>
+						<p class="det">{{ book.content }}</p>
+						<div class="det-footer">最新：{{book.latest}}</div>
+					</section>
+					<section class="book-other">
+						<h3 class="title">类别标签</h3>
+						<ul class="tag-list">
+							<li class="tag" v-for="tag in book.tags">{{tag}}</li>
+						</ul>
+					</section>
+					
+					
+					<section class="book-other">
+						<h3 class="title">作者的其他作品</h3>
+						<ul class="list clearfix">
+							<li class="list-item" v-for="list in author_books">
+								<a href="javascript:;">
+									<div class="cover">
+										<img :src="list.cover" width="100%" height="100%"/>
+									</div>
+									<div class="info">{{list.title}}</div>
+								</a>
+							</li>
+							<!--<li class="list-item">
+								<a href="javascript:;">
+									<div class="cover">
+										<img src="http://cover.read.duokan.com/mfsv2/download/s010/p01yfPOuJRok/dQJSYfAnD3AB42.jpg" width="100%" height="100%"/>
+									</div>
+									<div class="info">盗墓笔记</div>
+								</a>
+							</li>
+							<li class="list-item">
+								<a href="javascript:;">
+									<div class="cover">
+										<img src="http://cover.read.duokan.com/mfsv2/download/s010/p01yfPOuJRok/dQJSYfAnD3AB42.jpg" width="100%" height="100%"/>
+									</div>
+									<div class="info">盗墓笔记</div>
+								</a>
+							</li>-->
+						</ul>
+					</section>
+					<section class="book-other">
+						<h3 class="title">喜欢本书的人也喜欢</h3>
+						<ul class="list clearfix">
+							<li class="list-item" v-for="list in related">
+								<a href="javascript:;">
+									<div class="cover">
+										<img :src="list.cover" width="100%" height="100%"/>
+									</div>
+									<div class="info">{{list.title}}</div>
+								</a>
+							</li>
+							<!--<li class="list-item">
+								<a href="javascript:;">
+									<div class="cover">
+										<img src="http://cover.read.duokan.com/mfsv2/download/s010/p01yfPOuJRok/dQJSYfAnD3AB42.jpg" width="100%" height="100%"/>
+									</div>
+									<div class="info">盗墓笔记</div>
+								</a>
+							</li>
+							<li class="list-item">
+								<a href="javascript:;">
+									<div class="cover">
+										<img src="http://cover.read.duokan.com/mfsv2/download/s010/p01yfPOuJRok/dQJSYfAnD3AB42.jpg" width="100%" height="100%"/>
+									</div>
+									<div class="info">盗墓笔记</div>
+								</a>
+							</li>-->
+						</ul>
+					</section>
+					<section class="book-other">
+						<h3 class="title">图书信息</h3>
+						<p class="copyright">{{book.rights}}</p>
+					</section>
+				</div>
+			</div>
+			<script>
+				$(function(){
+					var id = location.href.split('?id=').pop();
+					console.log(id);
+					$.getJSON("/api_book",{id:id},function(data){
+						console.log(data);
+						if(data.result===0){
+							new Vue({
+								el:"#root",
+								data:{
+									book:data.item,
+									author_books:data.author_books,
+									related:data.related
+								}
+							});
+						}
+					});
+				});
+			</script>
+	</body>
+</html>

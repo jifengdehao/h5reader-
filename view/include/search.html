@@ -1,0 +1,155 @@
+<style>
+	.search-warpper {
+		height: 44px;
+		background: #efeff0;
+		border-bottom: 1px solid #ddd;
+		overflow: hidden;
+	}
+	
+	.search-warpper .search-content {
+		position: relative;
+		margin: 5px;
+		height: 35px;
+		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+	}
+	
+	.search-warpper .search-content .search-input {
+		border: none;
+		box-sizing: border-box;
+		display: block;
+		width: 100%;
+		height: 100%;
+		padding: 8px 52px 8px 42px;
+		font-size: 14px;
+		color: rgba(0, 0, 0, 0.8);
+		background: #fff;
+	}
+	
+	.search-warpper .search-content .search-icon {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 36px;
+		height: 35px;
+		border-right: 1px solid rgba(0, 0, 0, 0.1);
+		background: url("http://image.read.duokan.com/mfsv2/download/s010/p01TjruXIhgt/PP13pEqhpChuay.png") no-repeat center;
+		background-size: 16px 16px;
+	}
+	
+	.search-warpper .search-content .search-btn {
+		display: block;
+		line-height: 36px;
+		position: absolute;
+		right: 0;
+		top: 0;
+		border-left: 1px solid #ddd;
+		padding: 0 8px;
+		font-size: 14px;
+		color: #666;
+	}
+	
+	.result-list {
+		background-color: #FFFFFF;
+	}
+	
+	.result-list .list-item {
+		border-bottom: 1px solid #f0f0f0;
+		padding: 13px;
+	}
+	
+	.result-list .list-item a {
+		display: flex;
+	}
+	
+	.result-list .list-item .item-img {
+		flex: 0 0 85px;
+		width: 85px;
+		height: 113px;
+	}
+	
+	.result-list .list-item .item-content {
+		flex: 1;
+		padding-left: 10px;
+	}
+	
+	.result-list .list-item .item-content .title {
+		margin-bottom: 4px;
+		font-size: 14px;
+		font-weight: 400;
+		color: #333;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	
+	.result-list .list-item .item-content .summary {
+		margin-bottom: 4px;
+		font-size: 12px;
+		line-height: 1.6;
+		color: #888;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical
+	}
+	.search-tip{
+		height: 30px;
+		line-height: 30px;
+		text-align: center;
+		font-size: 14px;
+	}
+</style>
+<div id="search">
+	<div class="search-warpper">
+		<div class="search-content">
+			<div class="search-icon"></div>
+			<input type="text" class="search-input" placeholder="输入书名/作者/关键字" v-model="keyword" />
+			<div class="search-btn" v-on:click="doSearch">搜索</div>
+		</div>
+	</div>
+	<ul class="result-list" v-if="condition">
+		<li class="list-item" v-for="item in results">
+			<a href="http://dushu.xiaomi.com/#page=book&id={{item.id}}&source_id={{item.source_id}}&source={{item.source}}&_t=search_{{keyword}}.b.0*{{item.source}}_{{item.source_id}}&&from=search">
+				<div class="item-img">
+					<img :src="item.cover" alt="item.title" width="100%" height="100%" />
+				</div>
+				<div class="item-content">
+					<h3 class="title">{{item.title}}</h3>
+					<p class="summary">{{item.intro}}</p>
+				</div>
+			</a>
+		</li>
+	</ul>
+	<!--搜索不到提示-->
+	<div class="search-tip" v-show="empty">没有相应的搜索结果</div>
+	
+</div>
+<script>
+	new Vue({
+		el: "#search",
+		data: {
+			results: [],
+			condition: false,
+			empty: false,
+			keyword: ""
+		},
+		methods: {
+			doSearch: function(e) {			
+				var keyword = this.keyword;
+				var _this = this;
+				$.get('/api_search', {keyword: keyword}, function(d) {
+					console.log(d);
+					_this.results = d.items;
+					if(_this.results.length == 0) {
+						_this.empty = true;
+						_this.condition = false;
+					} else {
+						_this.empty = false;
+						_this.condition = true;
+					}
+				}, 'json')
+			}
+		}
+	})
+</script>

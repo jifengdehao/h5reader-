@@ -1,0 +1,48 @@
+<div class="block">
+	<div class="block-title"><h3>女生最爱</h3></div>
+	<ul class="block-list">
+		<li class="list-item" v-for="item in female">
+				<a href="/book?id={{item.fiction_id}}">
+					<div class="item-img">
+						<img :src="item.cover" alt="{{item.title}}"/>
+						<div class="status" v-if="item.finish">完结</div>
+						<div class="status" v-else>连载</div>
+					</div>
+					<div class="item-content">
+						<div class="content-title">{{item.title}}</div>
+						<div class="author">{{item.authors}}</div>
+						<p class="summary">{{item.summary}}</p>
+						<div class="tag-list clearfix">
+							<div class="tag" v-for="tag in item.tags">{{tag}}</div>
+							<!--<div class="tag">渣王作妃</div>
+							<div class="tag">渣王作妃</div>
+							<div class="tag">渣王作妃</div>-->
+						</div>
+					</div>
+				</a>
+		</li>
+		<!--<li class="list-item">
+				<a href="javascript:;">
+					<div class="item-img">
+						<img src="http://cover.read.duokan.com/mfsv2/download/fdsc3/p017io4EIZgP/tK1TkKVduNMK7w.jpg" alt=""/>
+						<div class="status">完结</div>
+					</div>
+					<div class="item-content">
+						<div class="content-title">渣王作妃</div>
+						<div class="author">admin</div>
+						<p class="summary">大元王朝湛王爷，有权有财有貌，就是人变态了点！容家九小姐，有貌善良清纯，可惜除了貌其他都是装的！娶她</p>
+						<div class="tag-list clearfix">
+							<div class="tag">渣王作妃</div>
+							<div class="tag">渣王作妃</div>
+							<div class="tag">渣王作妃</div>
+							<div class="tag">渣王作妃</div>
+						</div>
+					</div>
+				</a>
+		</li>-->
+	</ul>
+	<div class="block-bottom">
+			<a href="javascript:;">换一换</a>
+			<a href="/female">女生频道&gt;&gt;</a>
+	</div>
+</div>

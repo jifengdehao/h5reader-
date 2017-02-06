@@ -1,0 +1,67 @@
+<style>
+	.header{
+		width: 100%;
+		height: 44px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		background-color: #efeff0;
+		border-bottom: 1px solid #ddd;
+	}
+	.header .content{
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+		height: 44px;
+		z-index: 1;
+	}
+	.header .content .checkin-icon{
+		width: 44px;
+		height: 44px;
+		display: block;
+		position: absolute;
+		left: 0;
+		top: 0;
+		background: url("http://image.read.duokan.com/mfsv2/download/s010/p01O5K5DzsAZ/2ZODzjwkRQh7l3.png") no-repeat center;
+    	background-size: 22px;
+	}
+	.header .content .person-icon{
+		width: 44px;
+		height: 44px;
+		display: block;
+		position: absolute;
+		right: 0;
+		top: 0;
+		background: url("http://image.read.duokan.com/mfsv2/download/fdsc3/p01j041d5DOT/boUg2EJlVetOMC.png") no-repeat center;
+    	background-size: 16px;
+	}
+	.header .content .header-tab{
+		position: absolute;
+		left: 44px;
+		right: 44px;
+		height: 44px;
+		top: 0;
+		bottom: 0;
+		text-align: center;
+	}
+	.header .content .header-tab .tab-item{
+		width: 44px;
+		height: 44px;
+		display:inline-block;
+		line-height: 44px;
+	}
+	.header .content .header-tab .tab-item.active{
+		color: #ff6600;
+	}
+</style>
+<div class="header">
+	<div class="content">
+		<a href="http://dushu.xiaomi.com/#page=checkin" class="checkin-icon"></a>
+		<div class="header-tab" id="header_tab">
+			<a href="javascript:;" class="tab-item active">书城</a>
+			<a href="javascript:;" class="tab-item">书架</a>
+		</div>
+		<a href="/usercenter" class="person-icon"></a>
+	</div>
+</div>

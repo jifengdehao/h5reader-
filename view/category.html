@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<% include include/common.html %>
+		<title><%=title%></title>
+		<style>
+			.category-section{
+				padding: 10px 10px 0 10px;
+				background-color: #FFFFFF;
+			}
+			.category-section .title-warpper{
+				border-bottom: 1px solid #EEEEEE;
+				color: #8A8D8E;
+				position: relative;
+				line-height: 30px;
+				box-sizing: border-box;
+			}
+			.category-section .title-warpper .icon{
+				display: inline-block;
+				width: 16px;
+				height: 16px;
+				background: url("http://dushu.xiaomi.com/v3WqdeYP.png") no-repeat;
+				position: absolute;
+				top: 50%;
+				left: 0;
+				margin-top: -8px;
+			}
+			.category-section .title-warpper .book{
+				background-size: 16px;
+				background-position: 0 0;		
+			}
+			.category-section .title-warpper .magazine{
+				background-size: 16px;
+				background-position: 0 -16px;		
+			}
+			.category-section .title-warpper .male{
+				background-size: 16px;
+				background-position: 0 -32px;		
+			}
+			.category-section .title-warpper .female{
+				background-size: 16px;
+				background-position: 0 -48px;		
+			}
+			
+			.category-section .title-warpper .title{
+				font-size: 15px;
+				display: inline-block;
+				font-weight: 400;
+				margin-left: 21px;
+			}
+			.category-section .list{}
+			.category-section .list .list-item{
+				width: 49%;
+				box-sizing: border-box;
+				float: left;
+				margin: 1% 1% 0 0;
+			}
+			.category-section .list .list-item a{
+				display: block;
+				width: 100%;
+			    height: 66px;
+			    padding: 16px 6px 0;
+			    background-color: #eee;
+			    background-size: 100%;
+			    background-position: right bottom;
+			    background-repeat: no-repeat;
+			    color: #515151;
+			    box-sizing: border-box;
+			    background-image: url("http://image.read.duokan.com/mfsv2/download/fdsc3/p01PjzDGfBYE/XnRaYkmdbKPAsy.jpg!m");
+			}
+			.category-section .list .list-item .item-title{
+				font-size: 14px;
+				line-height: 20px;
+			}
+			.category-section .list .list-item .item-num{
+				font-size: 12px;
+			    color: #999;
+			    line-height: 12px;
+			    padding-top: 3px;
+			    padding-left: 1px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="root">
+			<% include include/sub-top.html %>
+			<div class="container">
+				<div class="category-section">
+					<div class="title-warpper">
+						<i class="icon book"></i>
+						<h2 class="title">图书分类</h2>			
+					</div>			
+					<ul class="list clearfix">
+						<li class="list-item" v-for="list in book">
+							<a href="javascript:;" style="background-image:url({{list.new_image}}!m);">
+								<div class="item-content">
+									<h3 class="item-title">{{list.label}}</h3>
+									<p class="item-num">{{list.book_count}}</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="category-section">
+					<div class="title-warpper">
+						<i class="icon magazine"></i>
+						<h2 class="title">杂志分类</h2>			
+					</div>			
+					<ul class="list clearfix">
+						<li class="list-item" v-for="list in magazine">
+							<a href="javascript:;" style="background-image:url({{list.image}}!m);">
+								<div class="item-content">
+									<h3 class="item-title">{{list.label}}</h3>
+									<p class="item-num">{{list.count}}</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="category-section">
+					<div class="title-warpper">
+						<i class="icon male"></i>
+						<h2 class="title">网文男频</h2>			
+					</div>			
+					<ul class="list clearfix">
+						<li class="list-item" v-for="list in male">
+							<a href="javascript:;" style="background-image:url({{list.new_image}}!m);">
+								<div class="item-content">
+									<h3 class="item-title">{{list.label}}</h3>
+									<p class="item-num">{{list.fiction_count}}</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="category-section">
+					<div class="title-warpper">
+						<i class="icon female"></i>
+						<h2 class="title">网文女频</h2>			
+					</div>			
+					<ul class="list clearfix">
+						<li class="list-item" v-for="list in female">
+							<a href="javascript:;" style="background-image:url({{list.new_image}}!m);">
+								<div class="item-content">
+									<h3 class="item-title">{{list.label}}</h3>
+									<p class="item-num">{{list.fiction_count}}</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+				
+			</div>
+		</div>
+		<script>
+			$(function(){
+				$.get("/api_category",function(data){
+					console.log(data);
+					if(data.result ===0){
+						new Vue({
+							el:"#root",
+							data:{
+								section:data.section,
+								book:data.book,
+								female:data.female,
+								male:data.male,
+								magazine:data.magazine,
+							},
+							
+						});
+					}				
+				},"json");
+			});
+		</script>
+	</body>
+</html>

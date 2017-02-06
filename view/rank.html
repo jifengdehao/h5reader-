@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<% include include/common.html %>
+		<title><%=title%></title>
+		<style>
+			.rank{
+				background-color: #fff;
+			}
+			.rank .rank-list{
+				border-bottom: 1px solid #eee;
+				padding: 12px 0 6px 20px;
+				overflow: hidden;
+				box-sizing: border-box;
+			}
+			.rank .rank-list:last-child{
+				border-bottom: none;
+			}
+			.rank .rank-list a{
+				display: flex;
+				display: -webkit-box;
+				display: -webkit-flex;
+			}
+			.rank .rank-list .list-img{
+				flex: 0 0 90px;
+				width: 90px;
+			}
+			.rank .rank-list .list-content{
+				flex: 1;
+				padding-left: 15px;
+				margin-top: 5px;
+			}
+			.rank .rank-list .list-content p{
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				font-size: 14px;
+				line-height: 26px;
+			}
+			.rank .rank-list .list-content .num{
+				margin-right: 7px;
+				color: #777;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="root">
+			<% include include/sub-top.html %>
+			<div class="container">
+				<ul class="rank">
+					<li class="rank-list" v-for="item in rank" v-if="$index>18">
+						<a href="javascript:;">
+							<div class="list-img">
+								<img :src="item.cover" width="100%" alt="{{item.name}}"/>
+							</div>	
+							<div class="list-content">
+								<p class="content-p" v-for="book in item.description">
+									<span class="num">{{ $index+1 }}</span>{{book}}
+								</p>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script>
+			$(function(){
+				$.getJSON("/api_rank",function(data){
+					console.log(data);
+					if(data.result===0){
+						for(var i=0;i<data.items.length;i++){
+							data.items[i].description = data.items[i].description.split('\n');
+						}
+						new Vue({
+							el:"#root",
+							data:{
+								rank:data.items
+							}
+						})
+					}
+				})
+			});
+		</script>
+	</body>
+</html>

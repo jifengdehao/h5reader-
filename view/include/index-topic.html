@@ -1,0 +1,44 @@
+<style>
+	.block .special-list{
+		padding: 13px 13px 0px;
+		overflow: hidden;
+	}
+	.block .special-list .special-img{
+		width: 50%;
+		float: left;
+		margin-bottom: 16px;
+	    padding: 0 3px;
+	    box-sizing: border-box;
+	}
+</style>
+<div class="block" style="margin: 0;">
+	<div class="block-title">
+		<h3>精彩专题</h3>
+		<i class="tip">热</i>
+	</div>
+	<ul class="special-list clearfix">	
+		<li class="special-img" v-for="item in topic">
+			<a href="/topic&type=fiction&id={{item.reference_id}}">
+				<img :src="item.ad_pic_url" alt="{{item.ad_name}}" width="100%"/>
+			</a>
+		</li>	
+		<!--<li class="special-img">
+			<a href="javascript:;">
+				<img src="http://image.read.duokan.com/mfsv2/download/fdsc3/p01cjtwdtMY9/vOmsMitEMiFJmW.jpg" alt="" width="100%"/>
+			</a>
+		</li>
+		<li class="special-img">
+			<a href="javascript:;">
+				<img src="http://image.read.duokan.com/mfsv2/download/fdsc3/p01cjtwdtMY9/vOmsMitEMiFJmW.jpg" alt="" width="100%"/>
+			</a>
+		</li>
+		<li class="special-img">
+			<a href="javascript:;">
+				<img src="http://image.read.duokan.com/mfsv2/download/fdsc3/p01cjtwdtMY9/vOmsMitEMiFJmW.jpg" alt="" width="100%"/>
+			</a>
+		</li>-->
+	</ul>
+	<div class="free-bottom">
+		<a href="/topic">更多精彩专题&gt;&gt;</a>
+	</div>
+</div>

@@ -1,0 +1,68 @@
+<div class="block">
+	<div class="block-title free-title"><h3>限时免费</h3></div>
+	<ul class="free-list clearfix">
+		<li class="list-item" v-for="item in free">
+			<a href="/book?id={{item.data.fiction_id}}">
+				<div class="item-content">
+					<div class="item-img">
+						<img :src="item.data.cover" alt="{{item.data.title}}" width="100%"/>
+					</div>			
+					<div class="tip">限免</div>
+				</div>
+			</a>
+		</li>
+		<!--<li class="list-item">
+			<a href="javascript:;">
+				<div class="item-content">
+					<div class="item-img">
+						<img src="http://cover.read.duokan.com/mfsv2/download/s010/p01VDPbKDM9I/dpqVglHnM0MOvN.jpg" alt="" width="100%"/>
+					</div>			
+					<div class="tip">限免</div>
+				</div>
+			</a>
+		</li>
+		<li class="list-item">
+			<a href="javascript:;">
+				<div class="item-content">
+					<div class="item-img">
+						<img src="http://cover.read.duokan.com/mfsv2/download/s010/p01VDPbKDM9I/dpqVglHnM0MOvN.jpg" alt="" width="100%"/>
+					</div>			
+					<div class="tip">限免</div>
+				</div>
+			</a>
+		</li>
+		<li class="list-item">
+			<a href="javascript:;">
+				<div class="item-content">
+					<div class="item-img">
+						<img src="http://cover.read.duokan.com/mfsv2/download/s010/p01VDPbKDM9I/dpqVglHnM0MOvN.jpg" alt="" width="100%"/>
+					</div>			
+					<div class="tip">限免</div>
+				</div>
+			</a>
+		</li>
+		<li class="list-item">
+			<a href="javascript:;">
+				<div class="item-content">
+					<div class="item-img">
+						<img src="http://cover.read.duokan.com/mfsv2/download/s010/p01VDPbKDM9I/dpqVglHnM0MOvN.jpg" alt="" width="100%"/>
+					</div>			
+					<div class="tip">限免</div>
+				</div>
+			</a>
+		</li>
+		<li class="list-item">
+			<a href="javascript:;">
+				<div class="item-content">
+					<div class="item-img">
+						<img src="http://cover.read.duokan.com/mfsv2/download/s010/p01VDPbKDM9I/dpqVglHnM0MOvN.jpg" alt="" width="100%"/>
+					</div>			
+					<div class="tip">限免</div>
+				</div>
+			</a>
+		</li>-->
+	</ul>
+	<div class="free-bottom">
+		<a href="/free">更多限免佳作&gt;&gt;</a>
+	</div>
+</div>
